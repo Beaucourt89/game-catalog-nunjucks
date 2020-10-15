@@ -1,23 +1,20 @@
 {% extends "layout/index.njk" %}
-
 {% block title %}
   <title>GD: {{game.name}}</title>
 {% endblock %}
-
 {% block content %}
   <h1>{{game.name}}</h1>
-  
   <img src="{{game.cover.url}}" alt="{{game.name}} cover">
-  
+
   <p>
     available on
     {% for platform in game.platforms %}
       {{platform.name}}
     {% endfor %}
   </p>
-  
+
   <p>{{game.summary}}</p>
-  
+
   <h2>Screenshots</h2>
   {% if game.screenshots %}
     <div id="game-screenshots" class="carousel slide" data-ride="carousel">
