@@ -6,22 +6,30 @@
 {% endblock %}
 
 {% block css %}
-  <link rel="stylesheet" href="assets/styles/games.css">
+  <link rel="stylesheet" href="/assets/styles/games.css">
 {% endblock %}
 
 {% block content %}
+<div class="gamesPrendTt">
   <h1>Games</h1>
   <ul class="list-group">
     {% for game in games %}
-      <li class="list-group-item d-flex position-relative">
-        <img src="{{game.cover.thumbnail}}" alt="{{game.name}} cover" class="mr-2">
+      <li class="list-group-item d-flex position-relative"> 
+      <img src="{{game.cover.url}}" class="mr-2 imgJeux" alt="{{game.name}}">
+        {# petite image pixelisé
+        <img src="{{game.cover.thumbnail}}" alt="{{game.name}} cover" class="mr-2 imgJeux">
+        #}
         <h3><a href="/games/{{game.slug}}">{{game.name}}</a></h3>
-        <div class="game-availability position-absolute">
+        <div class="game-availability">
           {% for platform in game.platforms %}
-            <img src="{{platform.platform_logo.url}}" height="40px" width="40px" class="ml-2">
+            <img src="{{platform.platform_logo.url}}" height="40px" width="40px" class="ml-2 imgPlatform">
           {% endfor %}
+        </div>
+      <div class="gamesBoutonDuBas position-absolute">
+        <a href="/games/{{game.slug}}"><button type="button" class="btn btn-primary  btn-block">See More!</button></a>
         </div>
       </li>
     {% endfor %}
   </ul>
+  </div>
 {% endblock %}

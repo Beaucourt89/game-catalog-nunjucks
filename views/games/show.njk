@@ -2,19 +2,35 @@
 {% block title %}
   <title>GD: {{game.name}}</title>
 {% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="/assets/styles/game.css">
+{% endblock %}
+
 {% block content %}
-  <h1>{{game.name}}</h1>
-  <img src="{{game.cover.url}}" alt="{{game.name}} cover">
 
-  <p>
-    available on
+  <div class="encadrementPrincipal text-white bg-dark">
+    <div class="card mb-3 text-white bg-dark" style="max-width: 100%;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="{{game.cover.url}}" class="card-img" alt="{{game.name}} cover">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h3 class="card-title">{{game.name}}</h3>
+        <p class="card-text textSummary">{{game.summary}}</p>
+         
+ 
+        <p class="card-text"><small><strong class="cligno">available on :</strong>
     {% for platform in game.platforms %}
-      {{platform.name}}
-    {% endfor %}
-  </p>
+        <img src="{{platform.platform_logo.url}}" height="60px" width="60px" class="ml-2 imgPlatform">
+      {% endfor %}</small></p>
+      </div>
+    </div>
+  </div>
 
-  <p>{{game.summary}}</p>
 
+  </div>
   <h2>Screenshots</h2>
   {% if game.screenshots %}
     <div id="game-screenshots" class="carousel slide" data-ride="carousel">
@@ -51,5 +67,6 @@
     {% else %}
       <p>No screenshots</p>
     {% endif %}
+  </div>
   </div>
 {% endblock %}

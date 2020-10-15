@@ -9,17 +9,22 @@
 {% endblock %}
 
 {% block content %}
+<div id="cadredesPlatforms">
   <h1>Platforms</h1>
+<div id="cadreInPlatforms">
   <div class="platforms-list d-flex justify-content-between">
     {% for platform in platforms %}
-      <div class="card" style="width: 18rem;">
-        <img src="{{platform.platform_logo.url}}" class="card-img-top" alt="...">
+      <div class="card">
+        <div class="cadre-img">
+          <img src="{{platform.platform_logo.url}}" class="card-img-top" alt="...">
+        </div>
         <div class="card-body">
           <h5 class="card-title">{{platform.name}}</h5>
-          <p class="card-text partial-text">{{platform.summary}}</p>
+          <p class="card-icon partial-text">{{platform.summary}}</p>
           <a href="/platforms/{{platform.slug}}" class="btn btn-primary">Go somewhere</a>
         </div>
       </div>
     {% endfor %}
+  </div>
   </div>
 {% endblock %}

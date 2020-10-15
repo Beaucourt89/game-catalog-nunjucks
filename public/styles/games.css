@@ -1,4 +1,49 @@
 .game-availability {
-    right: 10px;
+  right: 10px;
+  bottom: 5px;
+  position: absolute;
+}
+.gamesBoutonDuBas {
+  display: none;
+}
+
+@media screen and (max-width: 700px) {
+  .gamesPrendTt {
+    background-color: rgb(139, 139, 139);
+  }
+  .game-availability {
+    position: relative;
+  }
+  .list-group-item {
+    align-self: center;
+    height: 60vh;
+    width: 50vh;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  .imgJeux {
+    width: 70%;
+    height: auto;
+    align-self: center;
+  }
+  h3 {
+    font-size: 1.3rem;
+    padding-top: 5%;
+  }
+  h1 {
+    display: none;
+  }
+  .gamesBoutonDuBas {
+    border: purple;
+    display: contents;
+    left: 10px;
     bottom: 5px;
   }
+  .btn-lg {
+    position: relative;
+  }
+}
+
+@media screen and (max-width: 900px) {
+
+}

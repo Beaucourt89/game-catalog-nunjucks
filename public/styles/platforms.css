@@ -1,4 +1,74 @@
 .partial-text {
-    height: 124px;
-    overflow: hidden;
+  height: 124px;
+  overflow: hidden;
+}
+h1{
+  font-size: 2.5rem;
+  color: whitesmoke;
+  margin: 10px;
+
+}
+
+#cadredesPlatforms{
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  height: 85vh;
+}
+#cadreInPlatforms{
+  width: 100%;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.card {
+  background-color: rgba(0, 0, 0, 0.172);
+  width: 18rem;
+}
+.card:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  width: 20rem;
+}
+.btn {
+  display: flex;
+  justify-content: center;
+}
+.cadre-img {
+  border: 2px solid black;
+  margin: 5px;
+  background-color: white;
+}
+.card-img-top {
+  width: 80%;
+  margin: 10%;
+}
+
+
+@media screen and (max-width: 991px) {
+  h1 {
+    text-align: center;
   }
+  .card {
+    display: flex;
+    margin-bottom: 15px;
+    width: 20rem;
+  }
+  .platforms-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .card {
+    color: rgb(0, 0, 0);
+    margin-bottom: 15px;
+    width: auto;
+  }
+  .platforms-list {
+    padding-left: 0;
+    margin: 1rem;
+  }
+  .partial-text{
+    /* display: none; */
+  }
+}

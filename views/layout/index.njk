@@ -15,8 +15,8 @@
     </head>
   <body>
     {% include "layout/navbar.njk" %}
-    {% block beforeContainer %}{% endblock %}
     <div class="container">
+    {% block beforeContainer %}{% endblock %}
       {% block content %}{% endblock %}
     </div>
 
