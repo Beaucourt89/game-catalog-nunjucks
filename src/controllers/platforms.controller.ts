@@ -37,12 +37,17 @@ export function show(platformModel: PlatformModel) {
 
 export function create(platformModel: PlatformModel) {
   return async (request: Request, response: Response): Promise<void> => {
-    const platformInput = { ...request.body, slug: slugify(request.body.name) };
+    const platformInput = {
+      ...request.body,
+      slug: slugify(request.body.name),
+      platform_logo: { height: 1000, url: request.body.url, width: 1000 },
+    };
     const errors = platformModel.validate(platformInput);
     if (errors.length > 0) {
       response.status(400).json({ errors });
     } else {
       const platform = await platformModel.insertOne(platformInput);
+      response.redirect("/platforms");
       response.status(201).json(platform);
     }
   };
@@ -61,6 +66,7 @@ export function update(platformModel: PlatformModel) {
           ...request.body,
           _id: platform._id,
         });
+
         response.status(201).json(updatedPlatform);
       }
     } else {
@@ -72,8 +78,10 @@ export function update(platformModel: PlatformModel) {
 export function destroy(platformModel: PlatformModel) {
   return async (request: Request, response: Response): Promise<void> => {
     const platform = await platformModel.findBySlug(request.params.slug);
+    console.log("79");
     if (platform) {
       platformModel.remove(platform._id);
+      response.redirect("/platforms");
       response.status(204).end();
     } else {
       response.status(404).end();

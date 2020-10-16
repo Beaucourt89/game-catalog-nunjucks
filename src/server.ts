@@ -2,12 +2,10 @@ import { Db } from "mongodb";
 import * as core from "express-serve-static-core";
 import express from "express";
 import * as dotenv from "dotenv";
-
 import * as gamesController from "./controllers/games.controller";
 import * as nunjucks from "nunjucks";
 import * as platformsController from "./controllers/platforms.controller";
 import initDb from "../utils/initDatabase";
-
 import GameModel, { Game } from "./models/gameModel";
 import PlatformModel, { Platform } from "./models/platformModel";
 import bodyParser from "body-parser";
@@ -17,6 +15,7 @@ dotenv.config();
 const clientWantsJson = (request: express.Request): boolean => request.get("accept") === "application/json";
 
 const jsonParser = bodyParser.json();
+const formParser = bodyParser.urlencoded({ extended: true });
 
 export function makeApp(db: Db): core.Express {
   const app = express();
@@ -32,14 +31,20 @@ export function makeApp(db: Db): core.Express {
   const platformModel = new PlatformModel(db.collection<Platform>("platforms"));
   const gameModel = new GameModel(db.collection<Game>("games"));
 
+  //HOME PAGE
   app.get("/", (_request, response) => response.render("pages/home"));
 
+  //PLATFORMS
   app.get("/platforms", platformsController.index(platformModel));
-  app.get("/platforms/:slug", platformsController.show(platformModel));
-  app.post("/platforms", jsonParser, platformsController.create(platformModel));
-  app.put("/platforms/:slug", jsonParser, platformsController.update(platformModel));
-  app.delete("/platforms/:slug", jsonParser, platformsController.destroy(platformModel));
+  app.post("/platforms", jsonParser, formParser, platformsController.create(platformModel));
 
+  app.get("/platforms/:slug", platformsController.show(platformModel));
+  app.put("/platforms/:slug", jsonParser, platformsController.update(platformModel));
+  app.post("/platforms/delete/:slug", jsonParser, formParser, platformsController.destroy(platformModel));
+
+  app.post("/platforms/:id", formParser, platformsController.update(platformModel));
+
+  //GAME
   app.get("/platforms/:slug/games", gamesController.list(gameModel));
   app.get("/games", gamesController.index(gameModel));
   app.get("/games/:slug", gamesController.show(gameModel));

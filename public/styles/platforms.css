@@ -48,6 +48,15 @@ h1 {
   background-color: rgba(0, 0, 0, 0.172);
   width: 18rem;
 }
+form{
+  color: white;
+}
+.tchoupi{
+  display: grid;
+}
+.tchoupi button{
+  margin-top: 10px;
+}
 .card:hover {
   /* background-color: rgba(0, 0, 0, 0.6);
   color: white;

@@ -9,22 +9,53 @@
 {% endblock %}
 
 {% block content %}
-<div id="cadredesPlatforms">
-  <h1>Platforms</h1>
-<div id="cadreInPlatforms">
-  <div class="platforms-list d-flex justify-content-around">
-    {% for platform in platforms %}
-      <div class="card">
-        <div class="cadre-img">
-          <img src="{{platform.platform_logo.url}}" class="card-img-top" alt="...">
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">{{platform.name}}</h5>
-          <p class="card-icon partial-text">{{platform.summary}}</p>
-          <a href="/platforms/{{platform.slug}}" class="btn btn-primary">Go somewhere</a>
-        </div>
+  <div id="cadredesPlatforms">
+    <h1>Platforms</h1>
+    <div id="cadreInPlatforms">
+      <div class="platforms-list d-flex justify-content-around">
+        {% for platform in platforms %}
+          <div class="card">
+            <div class="cadre-img">
+              <img src="{{platform.platform_logo.url}}" class="card-img-top" alt="...">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{platform.name}}</h5>
+              <p class="card-icon partial-text">{{platform.summary}}</p>
+              <a href="/platforms/{{platform.slug}}" class="btn btn-primary">Go somewhere</a>
+              <!-- form pour supprimer une platform-->
+              <form method="POST" class="tchoupi" action="/platforms/delete/{{platform.slug}}"
+            onSubmit = "return confirm('voulez-vous vraiment Supprimer ?');">
+                <button class="btn btn-danger" type="submit">Supprimer</button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
       </div>
-    {% endfor %}
-  </div>
-  </div>
+    </div>
+
+    <button class="btn btn-success w-100" onclick="afficherFormulaire()">Ajouter</button>
+    <form id="ajoutForm" method="POST" class="d-none" action="">
+      <fieldset>
+        <legend>Création d'une Platform</legend>
+        <div class="form-group">
+          <label for="name">Nom de la console</label>
+          <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="form-group">
+          <label for="url">Url de l'image</label>
+          <input type="text" class="form-control" id="url" name="url">
+        </div>
+        <label for="summary">Description</label>
+        <textarea type="text" class="form-control" id="summary" name="summary" rows="3"></textarea>
+        <button class="btn btn-primary" type="submit">Valider</button>
+      </div>
+    </fieldset>
+  </form>
+  <script>
+    function afficherFormulaire() {
+      document
+        .querySelector("#ajoutForm")
+        .removeAttribute("class");
+    }
+  </script>
 {% endblock %}
